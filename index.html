@@ -1,12 +1,104 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<title>Fluxus 2014</title>
 	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.min.css">
 </head>
 <body>
-	<canvas id="cnv">Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.</canvas>
-	<input type="button" value="reset" id="reset" />
-	<script type="text/javascript" src="js/canvas.js"></script>
+	<div id="jpreContent" class="fixwrap">
+		<img id="gate" src="img/gateclosed.png" style="position:fixed;bottom:0;width:100%;">
+		<!-- <img id="gate" src="img/redmask.png" style="position:fixed;bottom:0;width:33%;"> -->
+		<img id="gate" src="img/loadingtitle.png" style="position:fixed;bottom:0;width:100%;">
+	</div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jpreloader.min.js"></script>
+	<script type="text/javascript">
+	   $(document).ready(function() {
+	      $('body').jpreLoader({loaderVPos: '70%',splashVPos: '40%',autoClose: false});
+	      $("#jpreLoader")[0].style.left = '46%';
+	   });
+	</script>
+	<div id="main" class="abswrap">
+		<div id="navbar" class="fixwrap">
+			<center>
+				<ul>
+					<li data-name="home">Home</li><li data-name="about">About Us</li><li data-name="tech">Tech</li><li data-name="cult">Cult</li><li data-name="register">Registrations</li><li data-name="sponsors">Sponsors</li><li data-name="contact">Contact Us</li>
+				</ul>
+			</center>
+		</div>
+		<div id="content">
+			<div id="home" class="abswrap">
+				<div style="position:relative;top:50%;width:35%;margin:0 auto;">
+					<img id="redmask" style="width:100%;" src="img/redmask.png"></img>
+				</div>
+			</div>
+			<div id="about">about page</div>
+			<div id="tech"></div>
+			<div id="cult"></div>
+			<div id="events">
+				<div id="evt-sidebar" style="height:100%;width:20%;float:right;">
+				</div>
+				<div id="evt-details" style="height:100%;width:80%;">
+					<div id="evt-imgdiv">
+						<img id="evt-img" src="">
+					</div>
+					<div id="evt-title"></div>
+					<div id="evt-abst"></div>
+				</div>
+			</div>
+			<div id="sponsors">
+				<img style="max-width:270px;" src="img/sponsors/barbarian.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/bru.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/codechef.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/dainikbhaskar.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/dsn.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/esparsha.PNG"></img>
+				<img style="max-width:270px;" src="img/sponsors/faadooengineers.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/finlandlabs.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/freecharge.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/gamerlounge.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/hero.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/horizon.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/ibm.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/janatics.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/jetairways.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/kinect.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/knowafest.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/micromax.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/microsoft.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/myfm.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/mystudio.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/needbags.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/npcil.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/npcl.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/radisson.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/redmaple.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/sbi.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/techdefense.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/twenty19.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/ym.png"></img>
+				<img style="max-width:270px;" src="img/sponsors/zootout.png"></img>
+			</div>
+			<div id="contact">contact page</div>
+		</div>
+	</div>
+	<div id="modals">
+		<div id="register">
+		<center>
+		<span style="font: 250% MouseMemoirs;">Registration</span><br>
+		<form id="regForm" method="POST">
+		<table>
+			<tr> <td>Your name</td><td><input name="name" type="text"></td> </tr>
+			<tr> <td>College</td><td><input name="college" type="text"></td> </tr>
+			<tr> <td>City</td><td><input name="city" type="text"></td> </tr>
+			<tr> <td>E-Mail</td><td><input name="mail" type="text"></td> </tr>
+			<tr> <td><input type="button" value="close" class="modal-close"></td><td><input type="submit"></td> </tr>
+		</table>
+		</form>
+		</center>
+		</div>
+	</div>
+	<!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+	<script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>

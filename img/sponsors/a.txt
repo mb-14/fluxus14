@@ -1,0 +1,41 @@
+ Volume in drive C has no label.
+ Volume Serial Number is AC5B-DE4A
+
+ Directory of C:\xampp\htdocs\flux14\src\img\sponsors
+
+12/09/2013  12:47 AM    <DIR>          .
+12/09/2013  12:47 AM    <DIR>          ..
+12/09/2013  12:47 AM                 0 a.txt
+11/26/2013  06:04 AM            57,938 barbarian.png
+11/26/2013  06:04 AM            46,340 bru.png
+11/26/2013  06:04 AM            24,455 codechef.png
+11/26/2013  06:04 AM            40,980 dainikbhaskar.png
+11/26/2013  06:04 AM            35,884 dsn.png
+11/26/2013  06:04 AM            55,786 esparsha.PNG
+11/26/2013  06:04 AM            21,040 faadooengineers.png
+11/26/2013  06:04 AM            20,374 finlandlabs.png
+11/26/2013  06:04 AM            38,937 freecharge.png
+11/26/2013  06:04 AM            46,354 gamerlounge.png
+11/26/2013  06:04 AM            10,179 hero.png
+11/26/2013  06:04 AM            47,280 horizon.png
+11/26/2013  06:04 AM            11,447 ibm.png
+11/26/2013  06:04 AM            33,851 janatics.png
+11/26/2013  06:04 AM            29,365 jetairways.png
+11/26/2013  06:04 AM            54,518 kinect.png
+11/26/2013  06:04 AM            47,694 knowafest.png
+11/26/2013  06:04 AM            42,537 micromax.png
+11/26/2013  06:04 AM            32,688 microsoft.png
+11/26/2013  06:04 AM            71,153 myfm.png
+11/26/2013  06:04 AM            57,903 mystudio.png
+11/26/2013  06:03 AM            16,798 needbags.png
+11/26/2013  06:03 AM            13,072 npcil.png
+11/26/2013  06:03 AM            23,270 npcl.png
+11/26/2013  06:03 AM            32,657 radisson.png
+11/26/2013  06:03 AM            18,933 redmaple.png
+11/26/2013  06:03 AM            12,730 sbi.png
+11/26/2013  06:03 AM            18,633 techdefense.png
+11/26/2013  06:03 AM            24,462 twenty19.png
+11/26/2013  06:03 AM            60,053 ym.png
+11/26/2013  06:03 AM            34,559 zootout.png
+              32 File(s)      1,081,870 bytes
+               2 Dir(s)  182,669,078,528 bytes free
