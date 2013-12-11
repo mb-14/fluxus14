@@ -40,13 +40,11 @@ function openCntPg(a){
 			case "tech":
 			case "cult":
 			case "proshows":
-				animateOnce("#register",'rotateOut');
-				$("#register").hide();
+				$("#register").hide(200);
 				events.open(a);
 				break;
 			default:
-				animateOnce("#register",'rotateOut');
-				$("#register").hide();
+				$("#register").hide(200);
 				events.current = 0;
 				$("#content > div").fadeOut(500);
 				setTimeout(function(){$("#"+a).fadeIn(500);},510);
