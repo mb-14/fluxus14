@@ -22,22 +22,6 @@ html,body{
 *{
 	color: #DDD;
 }
-#preloadimgs{
-	background: url("team.png");
-	background: url("teamhover.png");
-	background: url("sponsors.png");
-	background: url("sponsorshover.png");
-	background: url("cult.png");
-	background: url("culthover.png");
-	background: url("proshows.png");
-	background: url("proshowshover.png");
-	background: url("tech.png");
-	background: url("techhover.png");
-	background: url("workshop.png");
-	background: url("workshophover.png");
-	background: url("theme.png");
-	background: url("themehover.png");
-}
 .abswrap{
 	position: absolute;
 	top: 0;

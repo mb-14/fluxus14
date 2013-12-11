@@ -146,14 +146,16 @@ $(window).on("mousemove",gateevent);
 var topic = function(titletext,name,img,hoverimg){
 	this.titletext = titletext;
 	this.name = name;
-	this.img = img;
-	this.hoverimg = hoverimg;
+	this.img = new Image();
+	this.img.src = "img/topics/"+img;
+	this.hoverimg = new Image();
+	this.hoverimg.src = "img/topics/"+hoverimg;
 	this.x = 0;
 	this.y = 0;
 	this.dom = document.createElement("div");
 	this.dom.id = this.name+"topic";
 	this.dom.className = "topic";
-	this.dom.src = "img/topics/"+this.img;
+	this.dom.src = this.img.src;
 	this.dom.style.position = "absolute";
 	this.dom.style.width = "80px";
 	this.dom.style.height = "80px";
@@ -161,7 +163,7 @@ var topic = function(titletext,name,img,hoverimg){
 	this.dom.style.top = 0;
 
 	this.idom = document.createElement("img");
-	this.idom.src = "img/topics/"+this.img;
+	this.idom.src = this.img.src;
 	this.idom.style.width = "100%";
 
 	this.title = document.createElement("div");
@@ -176,16 +178,16 @@ var topic = function(titletext,name,img,hoverimg){
 	this.dom.appendChild(this.title);
 	
 	var self = this;
-	this.setImg = function(y){$("#"+self.dom.id+" img")[0].src = "img/topics/"+y; }
+	this.setImg = function(y){$("#"+self.dom.id+" img")[0].src = y; }
 	this.setX = function(x){$("#"+self.dom.id)[0].style.left = x-35; }
 	this.setY = function(y){$("#"+self.dom.id)[0].style.top = y-35; }
 	this.dom.onmouseenter = function(e) {
-		$("#"+self.dom.id+" img")[0].src = "img/topics/"+self.hoverimg;
+		$("#"+self.dom.id+" img")[0].src = self.hoverimg.src;
 		animateOnce("#"+self.dom.id+" img",'pulse');
 		$("#"+self.dom.id+" .topic-title")[0].style.color = "#ffd700";
 	};
 	this.dom.onmouseleave = function(e) {
-		$("#"+self.dom.id+" img")[0].src = "img/topics/"+self.img;
+		$("#"+self.dom.id+" img")[0].src = self.img.src;
 		$("#"+self.dom.id+" .topic-title")[0].style.color = "#DDD";
 	};
 	this.dom.onclick = function(e) {
