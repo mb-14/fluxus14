@@ -5,9 +5,10 @@ $("#content > div").hide();
 $("#modals > div").hide();
 window.onload = function(){
 	$("#home").show();
-	$("#jpreButton").fadeOut(function(){
-		$("#jpreButton").text("ENTER");
-		$("#jpreButton").click(function(){
+	$("#loading").fadeOut(function(){
+		$("#loading").text("ENTER");
+		$("#loading").click(function(){
+			$("#preloader").fadeOut(200);
 			$(window).off("mousemove",gateevent);
 		});
 		$("#navbar ul li").click(function(){
@@ -16,7 +17,7 @@ window.onload = function(){
 	});
 	$(document).keyup(function(e){if(e.which==27){animateOnce("#modals > div",'rotateOut',function(){$("#modals > div").hide();});} });
 	$(".modal-close").click(function(e){$("#modals > div").hide(200);});
-	$("#jpreButton").fadeIn();
+	$("#loading").fadeIn();
 };
 
 var animateOnce = function(a,b,c){
@@ -39,6 +40,7 @@ function openCntPg(a){
 				break;
 			case "tech":
 			case "cult":
+			case "workshop":
 			case "proshows":
 				events.open(a);
 				break;
@@ -57,16 +59,14 @@ var events = {
 		if(events.current){
 			if(events.current!=a){
 				if($("#evt-sidebar")[0].style.float=='left'){
-					$("#evt-sidebar").addClass('animated slideOutLeft').one('animationend webkitAnimationEnd oAnimationEnd', function(){
-						$(this).removeClass('animated slideOutLeft');
+					animateOnce("#evt-sidebar",'slideOutLeft',function(){
 						events.load(a);
 						$("#evt-sidebar")[0].style.float='right';
 						$("#evt-details")[0].style.float='left';
 						animateOnce("#evt-sidebar",'slideInRight');
 					});
 				} else {
-					$("#evt-sidebar").addClass('animated slideOutRight').one('animationend webkitAnimationEnd oAnimationEnd', function(){
-						$(this).removeClass('animated slideOutRight');
+					animateOnce("#evt-sidebar",'slideOutRight',function(){
 						events.load(a);
 						$("#evt-sidebar")[0].style.float='left';
 						$("#evt-details")[0].style.float='right';
@@ -95,14 +95,21 @@ var events = {
 		var jsonfile = '';
 		switch(a){
 			case "proshows":
-				jsonfile = '';
+				$("#events")[0].style.background="rgba(17,24,17,0.85)";
+				jsonfile = 'data/proshows.json';
 				break;
 			case "tech":
-				jsonfile = '';
+				$("#events")[0].style.background="rgba(17,17,24,0.85)";
+				jsonfile = 'data/tech.json';
+				break;
+			case "workshop":
+				$("#events")[0].style.background="rgba(17,17,24,0.85)";
+				jsonfile = 'data/workshop.json';
 				break;
 			case "cult":
+				$("#events")[0].style.background="rgba(24,17,17,0.85)";
 				// jsonfile = 'https://googledrive.com/host/0B7gpUuZnCjpdVHRwWVgzZGt2bWM/events.json';
-				jsonfile = 'events.json';
+				jsonfile = 'data/cult.json';
 				break;
 		}
 		$("#evt-sidebar").html("<ul></ul>");
@@ -117,8 +124,7 @@ var events = {
 				};
 				$("#evt-sidebar ul li").click(function(){
 					var w = $(this)[0].dataset.id;
-					$("#evt-details").addClass('animated slideOutUp').one('animationend webkitAnimationEnd oAnimationEnd', function(){
-						$(this).removeClass('animated slideOutUp');
+					animateOnce("#evt-details",'slideOutUp',function(){
 						$("#evt-title").html(events.currentJSON[w].title);
 						$("#evt-img")[0].src = "http://lorempixel.com/700/300/technics";
 						$("#evt-abst").html(events.currentJSON[w].abstract);
@@ -135,7 +141,7 @@ var events = {
 var gateevent = function(event) {
 	if(event.pageY>72*window.innerHeight/100){
 		$("#gate")[0].src = "img/gateopen.png";
-		animateOnce('#jpreButton','tada');
+		animateOnce('#loading','tada');
 	}
 	else $("#gate")[0].src = "img/gateclosed.png";
 };
@@ -154,44 +160,36 @@ var topic = function(titletext,name,img,hoverimg){
 	this.dom.id = this.name+"topic";
 	this.dom.className = "topic";
 	this.dom.src = this.img.src;
-	this.dom.style.position = "absolute";
-	this.dom.style.width = "80px";
-	this.dom.style.height = "80px";
-	this.dom.style.left = 0;
-	this.dom.style.top = 0;
 
-	this.idom = document.createElement("img");
-	this.idom.src = this.img.src;
-	this.idom.style.width = "100%";
+	this.idom = document.createElement("div");
+	this.idom.className = "topic-imgdiv";
+	this.idomimg = document.createElement("img");
+	this.idomimg.src = this.img.src;
 
 	this.title = document.createElement("div");
 	this.title.className = "topic-title";
-	this.title.style.textAlign = "center";
-	this.title.style.fontSize = "140%";
-	this.title.style.fontFamily = "Carnevalee";
-	this.title.style.color = "#DDD";
 	$(this.title).text(this.titletext);
 	
+	this.idom.appendChild(this.idomimg);
 	this.dom.appendChild(this.idom);
 	this.dom.appendChild(this.title);
 	
 	var self = this;
 	this.setImg = function(y){$("#"+self.dom.id+" img")[0].src = y; }
-	this.setX = function(x){$("#"+self.dom.id)[0].style.left = x-35; }
+	this.setX = function(x){$("#"+self.dom.id)[0].style.left = x; }
 	this.setY = function(y){$("#"+self.dom.id)[0].style.top = y-35; }
 	this.dom.onmouseenter = function(e) {
-		$("#"+self.dom.id+" img")[0].src = self.hoverimg.src;
+		// $("#"+self.dom.id+" img")[0].src = self.hoverimg.src;
 		animateOnce("#"+self.dom.id+" img",'pulse');
-		$("#"+self.dom.id+" .topic-title")[0].style.color = "#ffd700";
+		$("#"+self.dom.id+" .topic-title")[0].style.color = "#000";
 	};
 	this.dom.onmouseleave = function(e) {
-		$("#"+self.dom.id+" img")[0].src = self.img.src;
-		$("#"+self.dom.id+" .topic-title")[0].style.color = "#DDD";
+		// $("#"+self.dom.id+" img")[0].src = self.img.src;
+		$("#"+self.dom.id+" .topic-title")[0].style.color = "#555";
 	};
 	this.dom.onclick = function(e) {
-		$("#"+self.dom.id).addClass('animated bounceOutUp').one('animationend webkitAnimationEnd oAnimationEnd', function(){
+		animateOnce("#"+self.dom.id,'bounceOutUp',function(){
 			$(this).hide();
-			$(this).removeClass('animated bounceOutUp');
 			openCntPg(self.name);
 			$(this).show(1000);
 		});
@@ -201,24 +199,31 @@ var topic = function(titletext,name,img,hoverimg){
 }
 var topics = [
 	new topic("Team Fluxus","team","team.png","teamhover.png"),
-	new topic("Sponsors","sponsors","sponsors.png","sponsorshover.png"),
+	new topic("Social Cause","social","social.png","socialhover.png"),
 	new topic("Culturals","cult","cult.png","culthover.png"),
 	new topic("Pro Shows","proshows","proshows.png","proshowshover.png"),
 	new topic("Technicals","tech","tech.png","techhover.png"),
 	new topic("Workshops","workshop","workshop.png","workshophover.png"),
-	new topic("theme","theme","theme.png","themehover.png")
+	new topic("Desi Carnival","theme","theme.png","themehover.png")
 ];
-for (var i = 0; i < topics.length; i++) {
-	topics[i].setX(window.innerWidth/2+(window.innerWidth*0.35)*Math.cos(-(i+1.5)*Math.PI/(topics.length+2)));
-	topics[i].setY(window.innerHeight+(window.innerHeight*0.8)*Math.sin(-(i+1.5)*Math.PI/(topics.length+2)));
-};
+var updateTopicPos = function(){
+	var sa = 39*Math.PI/180;
+	var n = topics.length;
+	var st = (sa*(n-1)/2)-90*Math.PI/180;
+	var cx = window.innerWidth/2-75;
+	var rx = window.innerWidth*0.25-40;
+	var cy = window.innerHeight*0.5;
+	var ry = window.innerHeight*0.34;
+	for (var i = 0; i < n; i++) {
+		topics[i].setX(cx+(rx)*Math.cos(st-i*sa));
+		topics[i].setY(cy+(ry)*Math.sin(st-i*sa));
+	};
+}
+updateTopicPos();
 
 $(window).resize(function(){
 	if(window.innerWidth<800) window.open('http://flux.src/mobile','_self');
-	for (var i = 0; i < topics.length; i++) {
-		topics[i].setX(window.innerWidth/2+(window.innerWidth*0.35)*Math.cos(-(i+1.5)*Math.PI/(topics.length+2)));
-		topics[i].setY(window.innerHeight+(window.innerHeight*0.8)*Math.sin(-(i+1.5)*Math.PI/(topics.length+2)));
-	};
+	updateTopicPos();
 });
 
 $("#regForm").submit(function(){
