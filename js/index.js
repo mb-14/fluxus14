@@ -14,14 +14,15 @@ window.onload = function(){
 			openCntPg($(this)[0].dataset.name);
 		});
 	});
-	$(document).keyup(function(e){if(e.which==27){$("#modals > div").hide(200);} });
+	$(document).keyup(function(e){if(e.which==27){animateOnce("#modals > div",'rotateOut',function(){$("#modals > div").hide();});} });
 	$(".modal-close").click(function(e){$("#modals > div").hide(200);});
 	$("#jpreButton").fadeIn();
 };
 
-var animateOnce = function(a,b){
+var animateOnce = function(a,b,c){
 	$(a).addClass('animated '+b).one('animationend webkitAnimationEnd oAnimationEnd', function(){
 		$(this).removeClass('animated '+b);
+		if(c!=undefined) c();
 	});
 };
 var chnginCnt = false;
@@ -33,7 +34,8 @@ function openCntPg(a){
 		$("#evt-title").html('');
 		switch(a){
 			case "register":
-				$("#register").show(200);
+				$("#register").show();
+				animateOnce("#register",'rotateIn');
 				break;
 			case "tech":
 			case "cult":
@@ -210,7 +212,7 @@ for (var i = 0; i < topics.length; i++) {
 };
 
 $(window).resize(function(){
-	// if(window.innerWidth<800) window.open('http://flux.src/mobile','_self');
+	if(window.innerWidth<800) window.open('http://flux.src/mobile','_self');
 	for (var i = 0; i < topics.length; i++) {
 		topics[i].setX(window.innerWidth/2+(window.innerWidth*0.35)*Math.cos(-(i+1.5)*Math.PI/(topics.length+2)));
 		topics[i].setY(window.innerHeight+(window.innerHeight*0.8)*Math.sin(-(i+1.5)*Math.PI/(topics.length+2)));
@@ -223,3 +225,8 @@ $("#regForm").submit(function(){
 	});
 	return false;
 });
+
+function render(){
+	requestAnimationFrame(render);
+}
+requestAnimationFrame(render);
