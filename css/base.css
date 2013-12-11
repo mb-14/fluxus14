@@ -38,7 +38,7 @@ html,body{
 	overflow: hidden;
 }
 #jpreContent{
-	background: url('../img/loadingbg.png') #DDD no-repeat center center fixed; 
+	background: url('../img/loadingbg.jpg') #DDD no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
