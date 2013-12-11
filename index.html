@@ -6,36 +6,42 @@
 </head>
 <body>
 	<div id="jpreContent" class="fixwrap">
-		<img id="gate" src="img/gateclosed.png" style="position:fixed;bottom:0;width:100%;">
-		<!-- <img id="gate" src="img/redmask.png" style="position:fixed;bottom:0;width:33%;"> -->
-		<img id="gate" src="img/loadingtitle.png" style="position:fixed;bottom:0;width:100%;">
+		<div style="position:absolute;top:27%;width:100%;">
+		<div style="position:relative;width:27%;margin:0 auto;">
+		<!-- <img src="img/redmask.png" class="floating" style="width:100%;"></img> -->
+		</div>
+		</div>
 	</div>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jpreloader.min.js"></script>
 	<script type="text/javascript">
 	   $(document).ready(function() {
-	      $('body').jpreLoader({loaderVPos: '70%',splashVPos: '40%',autoClose: false});
-	      $("#jpreLoader")[0].style.left = '46%';
+	      $('body').jpreLoader({loaderVPos: '20%'});
+	      $("#jpreLoader")[0].style.left = '48%';
 	   });
 	</script>
+	<div id="preloader" class="fixwrap">
+		<img id="gate" src="img/gateclosed.png" style="position:fixed;bottom:0;width:100%;">
+		<!-- <img id="gate" src="img/redmask.png" style="position:fixed;bottom:0;width:33%;"> -->
+		<img id="gate" src="img/loadingtitle.png" style="position:fixed;bottom:0;width:100%;">
+		<div id="loading">ENTER</div>
+	</div>
 	<div id="main" class="abswrap">
 		<div id="navbar" class="fixwrap">
 			<center>
 				<ul>
-					<li data-name="home">Home</li><li data-name="about">About Us</li><li data-name="tech">Tech</li><li data-name="cult">Cult</li><li data-name="register">Registrations</li><li data-name="sponsors">Sponsors</li><li data-name="contact">Contact Us</li>
+					<li data-name="home">Home</li><li data-name="about">About Us</li><li data-name="proshows">Pro-Shows</li><li data-name="tech">Tech</li><li data-name="cult">Cult</li><li data-name="workshops">Workshops</li><li data-name="social">Social Cause</li><li data-name="sponsors">Sponsors</li><li data-name="contact">Contact Us</li><li data-name="register">Register</li>
 				</ul>
 			</center>
 		</div>
 		<div id="content">
 			<div id="home" class="abswrap">
-				<div style="position:relative;top:50%;width:35%;margin:0 auto;">
-					<img id="redmask" class="floating" style="width:100%;" src="img/redmask.png"></img>
+				<div style="position:relative;top:30%;width:26%;margin:0 auto;">
+					<img id="redmask" style="width:100%;" src="img/homemask.png"></img>
 				</div>
 			</div>
 			<div id="about">about page</div>
-			<div id="tech"></div>
-			<div id="cult"></div>
-			<div id="events">
+			<div id="events"> <!-- Tech,cult,pooshows and workshops -->
 				<div id="evt-sidebar" style="height:100%;width:20%;float:right;">
 				</div>
 				<div id="evt-details" style="height:100%;width:80%;">

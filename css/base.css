@@ -38,7 +38,7 @@ html,body{
 	overflow: hidden;
 }
 #jpreContent{
-	background: url('../img/loadingbg.jpg') #DDD no-repeat center center fixed; 
+	background: #111 no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -46,21 +46,34 @@ html,body{
 	width: 100%;
 	height: 100%;
 }
+#preloader{
+	background: #DDD no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	width: 100%;
+	height: 100%;
+	z-index: 20;
+}
 #jprePercentage{
-	color: #111;
+	color: #AAA;
 	left: 35%;
 }
-#jpreButton{
+#loading{
+	position: relative;
+	top:70%;
 	font: 40px MouseMemoirs;
 	color: #222;
 	text-align: center;
 	cursor: pointer;
+	margin-right: 22px;
 }
 #navbar{z-index: 5;}
 #navbar ul{
-	font: 175% MouseMemoirs;
-	background: rgba(160, 29, 4,0.7);
-	padding: 0;
+	font: 125% MouseMemoirs;
+	background: rgba(134, 22, 1, 0.9);
+	padding: 4px;
 	margin: 0;
 	list-style-type: none;
 }
@@ -69,7 +82,7 @@ html,body{
      -moz-transition: all 0.3s ease-out; 
        -o-transition: all 0.3s ease-out; 
           transition: all 0.3s ease-out; 
-    color: #CAA9A9;
+    color: #E6DBDB;
 	padding: 2px 25px;
 	display: inline;
 }
@@ -78,22 +91,44 @@ html,body{
 	background: #961700;
 	cursor: pointer;
 }
+#main{
+	background: url('../img/loadingbg.jpg') #DDD no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 #content{
-	margin: 32px auto 0 auto;
+	margin: 30px auto 0 auto;
 	width: 100%;
+}
+#events{
+	width: 100%;
+	height: 100%;
+	background: rgba(17,17,17,0.85);
 }
 #modals{
 	position: absolute;
 	width: 100%;
 }
-#home{
-	/*background: url('../img/homebg.png') #DDD no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;*/
+.topic{
+	cursor: pointer;
+	position : absolute;
+	width : 150px;
+	height : 80px;
 }
-.topic{cursor: pointer;}
+.topic img{height:100%;}
+.topic .topic-imgdiv{width:80px;margin:0 auto;}
+.topic-title{
+	margin: 0;
+	width : 150px;
+	text-align : center;
+	font : 160% Carnevalee;
+	color : #555;
+}
+.topic-title:hover{
+	color : #111;
+}
 #register{
 	position: relative;
 	padding: 20px;
