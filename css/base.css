@@ -78,10 +78,10 @@ html,body{
 	list-style-type: none;
 }
 #navbar ul li{
-  -webkit-transition: all 0.3s ease-out; 
-     -moz-transition: all 0.3s ease-out; 
-       -o-transition: all 0.3s ease-out; 
-          transition: all 0.3s ease-out; 
+-webkit-transition: all 0.3s ease-out; 
+   -moz-transition: all 0.3s ease-out; 
+     -o-transition: all 0.3s ease-out; 
+        transition: all 0.3s ease-out; 
     color: #E6DBDB;
 	padding: 2px 25px;
 	display: inline;
@@ -93,10 +93,10 @@ html,body{
 }
 #main{
 	background: url('../img/loadingbg.jpg') #DDD no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+-webkit-background-size: cover;
+   -moz-background-size: cover;
+     -o-background-size: cover;
+        background-size: cover;
 }
 #content{
 	margin: 30px auto 0 auto;
@@ -185,7 +185,11 @@ html,body{
 	width: 20%;
 	height: 100%;
 	overflow: auto;
-	background: #CCC;
+	background: url('../img/sidebarbg.png') repeat-y; 
+-webkit-background-size: 100%;
+   -moz-background-size: 100%;
+     -o-background-size: 100%;
+        background-size: 100%;
 }
 #evt-sidebar ul{
 	padding: 0;
@@ -198,10 +202,10 @@ html,body{
 	font: 120% Carnevalee;
 }
 #evt-sidebar li:hover{
-	background: #EEE;
+	color: #600;
 	cursor: pointer;
 }
-#evt-details{overflow: auto;}
+#evt-details{width: 80%;height: 100%;overflow: auto;}
 #evt-abst{
 	font: 120% Allan;
 	padding: 70px;

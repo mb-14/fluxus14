@@ -63,6 +63,8 @@ var events = {
 						events.load(a);
 						$("#evt-sidebar")[0].style.float='right';
 						$("#evt-details")[0].style.float='left';
+						$("#evt-sidebar ul")[0].style.textAlign='right';
+						$("#evt-sidebar")[0].style.background = 'url("img/sidebarbg2.png")';
 						animateOnce("#evt-sidebar",'slideInRight');
 					});
 				} else {
@@ -70,6 +72,7 @@ var events = {
 						events.load(a);
 						$("#evt-sidebar")[0].style.float='left';
 						$("#evt-details")[0].style.float='right';
+						$("#evt-sidebar")[0].style.background = 'url("img/sidebarbg.png")';
 						animateOnce("#evt-sidebar",'slideInLeft');
 					});
 				}
@@ -82,10 +85,13 @@ var events = {
 			if($("#evt-sidebar")[0].style.float=='left'){
 				$("#evt-sidebar")[0].style.float='right';
 				$("#evt-details")[0].style.float='left';
+				$("#evt-sidebar ul")[0].style.textAlign='right';
+				$("#evt-sidebar")[0].style.background = 'url("img/sidebarbg2.png")';
 				animateOnce("#evt-sidebar",'slideInRight');
 			} else {
 				$("#evt-sidebar")[0].style.float='left';
 				$("#evt-details")[0].style.float='right';
+				$("#evt-sidebar")[0].style.background = 'url("img/sidebarbg.png")';
 				animateOnce("#evt-sidebar",'slideInLeft');
 			}
 		}
@@ -128,7 +134,7 @@ var events = {
 						$("#evt-title").html(events.currentJSON[w].title);
 						$("#evt-img")[0].src = "http://lorempixel.com/700/300/technics";
 						$("#evt-abst").html(events.currentJSON[w].abstract);
-						$("#evt-abst").append(events.currentJSON[w].rules);
+						$("#evt-abst").append('<br><br><div style="font: 120% Carnevalee;">RULES</div>'+events.currentJSON[w].rules);
 						$("#evt-abst").append(events.currentJSON[w].etc);
 						animateOnce("#evt-imgdiv",'slideInLeft');
 						animateOnce("#evt-abst",'slideInRight');
@@ -138,6 +144,8 @@ var events = {
 		});
 	}
 };
+var asdasd = new Image();
+asdasd.src = "img/gateopen.png";
 var gateevent = function(event) {
 	if(event.pageY>72*window.innerHeight/100){
 		$("#gate")[0].src = "img/gateopen.png";
@@ -204,15 +212,15 @@ var topics = [
 	new topic("Pro Shows","proshows","proshows.png","proshowshover.png"),
 	new topic("Technicals","tech","tech.png","techhover.png"),
 	new topic("Workshops","workshop","workshop.png","workshophover.png"),
-	new topic("Desi Carnival","theme","theme.png","themehover.png")
+	new topic("The Desi Carnival","theme","theme.png","themehover.png")
 ];
 var updateTopicPos = function(){
 	var sa = 39*Math.PI/180;
 	var n = topics.length;
 	var st = (sa*(n-1)/2)-90*Math.PI/180;
 	var cx = window.innerWidth/2-75;
-	var rx = window.innerWidth*0.25-40;
-	var cy = window.innerHeight*0.5;
+	var rx = window.innerWidth*0.24-40;
+	var cy = window.innerHeight*0.46;
 	var ry = window.innerHeight*0.34;
 	for (var i = 0; i < n; i++) {
 		topics[i].setX(cx+(rx)*Math.cos(st-i*sa));
