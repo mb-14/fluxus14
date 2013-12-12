@@ -11,9 +11,7 @@ window.onload = function(){
 			$("#preloader").fadeOut(200);
 			$(window).off("mousemove",gateevent);
 		});
-		$("#navbar ul li").click(function(){
-			openCntPg($(this)[0].dataset.name);
-		});
+		$("#navbar ul li").click(function(){openCntPg($(this)[0].dataset.name); });
 	});
 	$(document).keyup(function(e){if(e.which==27){animateOnce("#modals > div",'rotateOut',function(){$("#modals > div").hide();});} });
 	$(".modal-close").click(function(e){$("#modals > div").hide(200);});
@@ -30,7 +28,7 @@ var chnginCnt = false;
 function openCntPg(a){
 	if(!chnginCnt){
 		chnginCnt = true;
-		$("#evt-img")[0].src='';
+		$("#evt-img")[0].src=null;
 		$("#evt-abst").html('');
 		$("#evt-title").html('');
 		switch(a){
@@ -42,6 +40,7 @@ function openCntPg(a){
 			case "cult":
 			case "workshop":
 			case "proshows":
+			case "team":
 				events.open(a);
 				break;
 			default:
@@ -58,11 +57,11 @@ var events = {
 	open: function (a){
 		if(events.current){
 			if(events.current!=a){
-				if($("#evt-sidebar")[0].style.float=='left'){
+				if($("#evt-sidebar")[0].style.cssFloat=='left'){
 					animateOnce("#evt-sidebar",'slideOutLeft',function(){
 						events.load(a);
-						$("#evt-sidebar")[0].style.float='right';
-						$("#evt-details")[0].style.float='left';
+						$("#evt-sidebar")[0].style.cssFloat='right';
+						$("#evt-details")[0].style.cssFloat='left';
 						$("#evt-sidebar ul")[0].style.textAlign='right';
 						$("#evt-sidebar")[0].style.background = 'url("img/sidebarbg2.png")';
 						animateOnce("#evt-sidebar",'slideInRight');
@@ -70,8 +69,8 @@ var events = {
 				} else {
 					animateOnce("#evt-sidebar",'slideOutRight',function(){
 						events.load(a);
-						$("#evt-sidebar")[0].style.float='left';
-						$("#evt-details")[0].style.float='right';
+						$("#evt-sidebar")[0].style.cssFloat='left';
+						$("#evt-details")[0].style.cssFloat='right';
 						$("#evt-sidebar")[0].style.background = 'url("img/sidebarbg.png")';
 						animateOnce("#evt-sidebar",'slideInLeft');
 					});
@@ -79,18 +78,18 @@ var events = {
 			}
 		}else{
 			events.current = -1;
-			$("#content > div").fadeOut(500,function(){events.load(a); });
+			$("#content > div").fadeOut(500);
 			$("#events").show(0);
 			events.load(a);
-			if($("#evt-sidebar")[0].style.float=='left'){
-				$("#evt-sidebar")[0].style.float='right';
-				$("#evt-details")[0].style.float='left';
+			if($("#evt-sidebar")[0].style.cssFloat=='left'){
+				$("#evt-sidebar")[0].style.cssFloat='right';
+				$("#evt-details")[0].style.cssFloat='left';
 				$("#evt-sidebar ul")[0].style.textAlign='right';
 				$("#evt-sidebar")[0].style.background = 'url("img/sidebarbg2.png")';
 				animateOnce("#evt-sidebar",'slideInRight');
 			} else {
-				$("#evt-sidebar")[0].style.float='left';
-				$("#evt-details")[0].style.float='right';
+				$("#evt-sidebar")[0].style.cssFloat='left';
+				$("#evt-details")[0].style.cssFloat='right';
 				$("#evt-sidebar")[0].style.background = 'url("img/sidebarbg.png")';
 				animateOnce("#evt-sidebar",'slideInLeft');
 			}
@@ -100,41 +99,51 @@ var events = {
 	load: function(a){
 		var jsonfile = '';
 		switch(a){
+			case "team":
+				$("#events")[0].style.background="rgba(0,0,0,0.85)";
+				jsonfile = 'data/team.json';
+				break;
 			case "proshows":
-				$("#events")[0].style.background="rgba(17,24,17,0.85)";
+				$("#events")[0].style.background="rgba(5,10,0,0.85)";
 				jsonfile = 'data/proshows.json';
 				break;
 			case "tech":
-				$("#events")[0].style.background="rgba(17,17,24,0.85)";
+				$("#events")[0].style.background="rgba(5,10,10,0.85)";
 				jsonfile = 'data/tech.json';
 				break;
 			case "workshop":
-				$("#events")[0].style.background="rgba(17,17,24,0.85)";
+				$("#events")[0].style.background="rgba(5,0,10,0.85)";
 				jsonfile = 'data/workshop.json';
 				break;
 			case "cult":
-				$("#events")[0].style.background="rgba(24,17,17,0.85)";
+				$("#events")[0].style.background="rgba(15,0,0,0.85)";
 				// jsonfile = 'https://googledrive.com/host/0B7gpUuZnCjpdVHRwWVgzZGt2bWM/events.json';
 				jsonfile = 'data/cult.json';
 				break;
 		}
 		$("#evt-sidebar").html("<ul></ul>");
+		// $("#evt-sidebar ul").append('<li class="evt-sel">asdasdasd</li>');
 		$.ajax({
 			dataType: "json",
 			url: jsonfile,
 			data: {},
 			success: function(data){
 				events.currentJSON=data;
-				for (var i = 0; i < data.length; i++) {
+				for(var i=0;i<data.length;i++){
 					$("#evt-sidebar ul").append('<li data-id="'+i+'"">'+data[i].title+'</li>');
 				};
 				$("#evt-sidebar ul li").click(function(){
-					var w = $(this)[0].dataset.id;
+					$("#evt-sidebar ul li").removeClass('evt-sel');
+					var t = $(this);
+					t.addClass('evt-sel');
+					var w = t[0].dataset.id;
+					// $(".evt-sel").animate({marginTop: t.style.top});
 					animateOnce("#evt-details",'slideOutUp',function(){
 						$("#evt-title").html(events.currentJSON[w].title);
 						$("#evt-img")[0].src = "http://lorempixel.com/700/300/technics";
 						$("#evt-abst").html(events.currentJSON[w].abstract);
-						$("#evt-abst").append('<br><br><div style="font: 120% Carnevalee;">RULES</div>'+events.currentJSON[w].rules);
+						if(events.currentJSON[w].rules)
+							$("#evt-abst").append('<br><br><div style="font: 120% Carnevalee;">RULES</div>'+events.currentJSON[w].rules);
 						$("#evt-abst").append(events.currentJSON[w].etc);
 						animateOnce("#evt-imgdiv",'slideInLeft');
 						animateOnce("#evt-abst",'slideInRight');
@@ -160,8 +169,8 @@ var topic = function(titletext,name,img,hoverimg){
 	this.name = name;
 	this.img = new Image();
 	this.img.src = "img/topics/"+img;
-	this.hoverimg = new Image();
-	this.hoverimg.src = "img/topics/"+hoverimg;
+	// this.hoverimg = new Image();
+	// this.hoverimg.src = "img/topics/"+hoverimg;
 	this.x = 0;
 	this.y = 0;
 	this.dom = document.createElement("div");
@@ -188,7 +197,7 @@ var topic = function(titletext,name,img,hoverimg){
 	this.setY = function(y){$("#"+self.dom.id)[0].style.top = y-35; }
 	this.dom.onmouseenter = function(e) {
 		// $("#"+self.dom.id+" img")[0].src = self.hoverimg.src;
-		animateOnce("#"+self.dom.id+" img",'pulse');
+		animateOnce("#"+self.dom.id+" img",'flip');
 		$("#"+self.dom.id+" .topic-title")[0].style.color = "#000";
 	};
 	this.dom.onmouseleave = function(e) {
@@ -202,7 +211,6 @@ var topic = function(titletext,name,img,hoverimg){
 			$(this).show(1000);
 		});
 	};
-	// $("#home")[0].appendChild(t);
 	$(this.dom).appendTo("#home");
 }
 var topics = [
@@ -222,7 +230,7 @@ var updateTopicPos = function(){
 	var rx = window.innerWidth*0.24-40;
 	var cy = window.innerHeight*0.46;
 	var ry = window.innerHeight*0.34;
-	for (var i = 0; i < n; i++) {
+	for(var i=0;i<n;i++){
 		topics[i].setX(cx+(rx)*Math.cos(st-i*sa));
 		topics[i].setY(cy+(ry)*Math.sin(st-i*sa));
 	};
@@ -241,7 +249,58 @@ $("#regForm").submit(function(){
 	return false;
 });
 
-function render(){
-	requestAnimationFrame(render);
+//confetti/snow
+var cnv = document.getElementById('homecnv');
+var context = cnv.getContext('2d');
+cnv.width  = window.innerWidth;
+cnv.height = window.innerHeight;
+var atoms = [];
+var natoms = 50;
+var atomspeed = 1;
+function atom(x,y,r){
+	this.x = x;
+	this.y = y;
+	this.sx = 0;
+	this.sy = 0;
+	this.r = r;
+	this.color = {r:0,g:0,b:0};
+	this.draw = function(context){
+		context.beginPath();
+		context.fillStyle="hsla("+this.color+",90%,35%,0.3)";
+		context.arc(this.x+3,this.y+3,this.r,0,2*Math.PI);
+		context.fill();
+	}
 }
-requestAnimationFrame(render);
+function update(){
+    for(var i=0;i<natoms;i++){
+		atoms[i].x+=atoms[i].sx;
+		atoms[i].y+=atoms[i].sy;
+		if(atoms[i].x>cnv.width) atoms[i].x=0;
+		else if(atoms[i].x<0) atoms[i].x=cnv.width;
+		if(atoms[i].y>cnv.height) atoms[i].y=0;
+		else if(atoms[i].y<0) atoms[i].y=cnv.height; //never happens but check anyway
+    };
+}
+function render(){
+	context.clearRect(0,0,cnv.width,cnv.height);
+    for(var i=0;i<natoms;i++){atoms[i].draw(context);};
+}
+function loop(){
+	update();
+	render();
+	requestAnimationFrame(loop, cnv);
+};
+function initialize(){
+	for(var i=0;i<natoms;i++){
+		var t = new atom(Math.random()*cnv.width,Math.random()*cnv.height,2+Math.random()*3);
+		t.sx = Math.random()*atomspeed*2-atomspeed;
+		t.sy = Math.random()*atomspeed+atomspeed;
+		t.color = parseInt(Math.random()*360);
+		atoms[i]=t;
+	};
+}
+function main(){
+	initialize();
+	loop();
+}
+main();
