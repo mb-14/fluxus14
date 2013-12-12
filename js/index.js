@@ -137,7 +137,7 @@ function openCntPg(a){
 			case "tech":
 			case "cult":
 			case "workshop":
-			case "proshows":
+			// case "proshows":
 				events.open(a);
 				break;
 			default:
