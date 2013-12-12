@@ -141,7 +141,7 @@ html,body{
 	text-align:center;
 	width:19%;
 	float: left;
-	margin: 0 5%;
+	margin: 5% 5%;
 	background:url(../img/blackbg.png);
 	background-size: 100% 100%;
 	height:20px;
@@ -149,8 +149,8 @@ html,body{
 }
 .homefoot .caption{
 	position: absolute;
-	bottom: 0;
 	width: 60%;
+	top :5px;
 	text-align: center;
 	font: 120% MouseMemoirs;
 	color: #111;
@@ -191,9 +191,11 @@ html,body{
 }
 .teambottom{
 	background: rgba(80,80,80,0.65);
-	border: dashed 1px 0;
+	border: solid 1px 0;
 	width: 100%;
 	height: 40%;
+	z-index: 2;
+	position:absolute;
 	overflow: auto;
 }
 .teamtop .card{
@@ -241,6 +243,8 @@ text-shadow: 0 0 15px #000;
 	height: 100%;
 	overflow: auto;
 	float:left;
+	position:absolute;
+	z-index: 1;
 	background: url(../img/sidebarbg.png) repeat-y; 
 -webkit-background-size: 100% 100%;
    -moz-background-size: 100% 100%;
@@ -262,7 +266,7 @@ text-shadow: 0 0 15px #000;
 	cursor: pointer;
 }
 .sidebar .evt-sel{background: #EEE; }
-.details{width: 80%;height: 100%;overflow: auto;float:left;}
+.details{width: 85%; height: 100%; z-index:0; overflow: auto;margin-left:15%; position:absolute}
 .details .abst{
 	font: 120% Allan;
 	padding: 70px;
@@ -271,7 +275,7 @@ text-shadow: 0 0 15px #000;
 .details .imgdiv{
 	width:100%;
 	max-height: 300px;
-	overflow: auto;
+	overflow: hidden;
 }
 .details .img{width:100%; }
 .details .title {
@@ -291,12 +295,27 @@ text-shadow: 0 0 15px #000;
 }
 .themedesc{
 	text-align: center;
+	background: url('../img/redbg.png') no-repeat;
+	background-size: 100%;
 	font: 150% MouseMemoirs;
 	color: #022563;
 	padding: 30px 100px;
 	height: 50%;
 }
 .themedesc p{
+	color: #09C;
+}
+.about{
+	text-align: center;
+	background: url('../img/redbg.png') no-repeat;
+	background-size: 100% 80%;
+	font: 150% MouseMemoirs;
+	color: #022563;
+	margin-top:10%;
+	padding: 30px 200px;
+	height:80%;
+}
+.about p{
 	color: #09C;
 }
 #social{

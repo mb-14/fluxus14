@@ -154,42 +154,24 @@ var events = {
 	open: function (a){
 		if(events.current){
 			if(events.current!=a){
-				if($("#events .sidebar")[0].style.cssFloat=='left'){
+		
 					animateOnce("#events .sidebar",'slideOutLeft',function(){
-						events.load(a);
-						$("#events .sidebar")[0].style.cssFloat='right';
-						$("#events .details")[0].style.cssFloat='left';
-						$("#events .sidebar ul")[0].style.textAlign='right';
-						$("#events .sidebar")[0].style.backgroundImage = 'url(img/sidebarbg2.png)';
-						animateOnce("#events .sidebar",'slideInRight');
-					});
-				} else {
-					animateOnce("#events .sidebar",'slideOutRight',function(){
 						events.load(a);
 						$("#events .sidebar")[0].style.cssFloat='left';
 						$("#events .details")[0].style.cssFloat='right';
 						$("#events .sidebar")[0].style.backgroundImage = 'url(img/sidebarbg.png)';
 						animateOnce("#events .sidebar",'slideInLeft');
 					});
-				}
 			}
 		}else{
 			events.current = -1;
 			$("#content > div").fadeOut(500);
 			$("#events").show(0);
 			events.load(a);
-			if($("#events .sidebar")[0].style.cssFloat=='left'){
-				$("#events .sidebar")[0].style.cssFloat='right';
-				$("#events .details")[0].style.cssFloat='left';
-				$("#events .sidebar ul")[0].style.textAlign='right';
-				$("#events .sidebar")[0].style.backgroundImage = 'url(img/sidebarbg2.png)';
-				animateOnce("#events .sidebar",'slideInRight');
-			} else {
 				$("#events .sidebar")[0].style.cssFloat='left';
 				$("#events .details")[0].style.cssFloat='right';
 				$("#events .sidebar")[0].style.backgroundImage = 'url(img/sidebarbg.png)';
 				animateOnce("#events .sidebar",'slideInLeft');
-			}
 		}
 		events.current=a;
 	},
@@ -225,22 +207,15 @@ var events = {
 				for(var i=0;i<data.length;i++){
 					$("#events .sidebar ul").append('<li data-id="'+i+'"">'+data[i].title+'</li>');
 				};
+				fillDetails(0);
 				$("#events .sidebar ul li").click(function(){
 					$("#events .sidebar ul li").removeClass('.evt-sel');
 					var t = $(this);
 					t.addClass('.evt-sel');
-					var w = events.currentJSON[t[0].dataset.id];
+					
+					fillDetails(t[0].dataset.id);
 					// $(".evt-sel").animate({marginTop: t.style.top});
-					animateOnce("#events .details",'slideOutUp',function(){
-						$("#events .title").html(w.title);
-						$("#events .img")[0].src = "http://lorempixel.com/700/300/technics";
-						$("#events .abst").html(w.abstract);
-						if(w.rules)
-							$("#events .abst").append('<br><br><div style="font: 120% Carnevalee;">RULES</div>'+w.rules);
-						$("#events .abst").append(w.etc);
-						animateOnce("#events .imgdiv",'slideInLeft');
-						animateOnce("#events .abst",'slideInRight');
-					});
+				
 				});
 			}
 		});
@@ -286,6 +261,20 @@ function atom(x,y,r){
 		context.arc(this.x+3,this.y+3,this.r,0,2*Math.PI);
 		context.fill();
 	}
+}
+
+function fillDetails(index){
+var w = events.currentJSON[index];
+	animateOnce("#events .details",'slideOutUp',function(){
+						$("#events .title").html(w.title);
+						$("#events .img")[0].src = "http://lorempixel.com/700/300/technics";
+						$("#events .abst").html(w.abstract);
+						if(w.rules)
+							$("#events .abst").append('<br><br><div style="font: 120% Carnevalee;">RULES</div>'+w.rules);
+						$("#events .abst").append(w.etc);
+						animateOnce("#events .imgdiv",'slideInLeft');
+						animateOnce("#events .abst",'slideInRight');
+					});
 }
 function update(){
     for(var i=0;i<natoms;i++){
