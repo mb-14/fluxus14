@@ -24,6 +24,17 @@ var animateOnce = function(a,b,c){
 		if(c!=undefined) c();
 	});
 };
+var preloadimgs = [
+	'img/gateclosed.png',
+	'img/gateopen.png',
+	'img/sidebarbg.png',
+	'img/sidebarbg2.png'
+]
+var imgs = [];
+for (var i = 0; i < preloadimgs.length; i++) {
+	imgs.push(new Image());
+	imgs[i].src=preloadimgs[i];
+};
 var chnginCnt = false;
 function openCntPg(a){
 	if(!chnginCnt){
@@ -153,8 +164,6 @@ var events = {
 		});
 	}
 };
-var asdasd = new Image();
-asdasd.src = "img/gateopen.png";
 var gateevent = function(event) {
 	if(event.pageY>72*window.innerHeight/100){
 		$("#gate")[0].src = "img/gateopen.png";
