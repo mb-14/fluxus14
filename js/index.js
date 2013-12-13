@@ -24,8 +24,14 @@ $(window).on("mousemove",gateevent);
 
 $('#content > div').hide();
 $('#modals > div').hide();
-$('.teamtop .details > div').hide();
-$('.teamtop .details div[data-id="0"]').show();
+var teams = $(".teamtop .details").children();
+for(var i=0;i<teams.length;i++){
+    $(teams[i]).height(500);
+}
+//$('.teamtop .details > div').hide();
+//$('.teamtop .details div[data-id="0"]').show();
+$($(".teamtop .sidebar ul li")[0]).addClass('evt-sel');
+
 window.onload = function(){
 	$('#home').show();
 	$('#loading').fadeOut(function(){
@@ -180,20 +186,24 @@ var events = {
 		switch(a){
 			case "proshows":
 				$("#events")[0].style.background="rgba(5,10,0,0.85)";
-				jsonfile = 'data/proshows.json';
+				jsonfile='https://googledrive.com/host/0BzIWIU3qCj3beUxNVHNyQ1lOdWs/proshows.json'
+				//jsonfile = 'new/data/proshows.json';
 				break;
 			case "tech":
 				$("#events")[0].style.background="rgba(5,10,10,0.85)";
-				jsonfile = 'data/tech.json';
+				jsonfile='https://googledrive.com/host/0BzIWIU3qCj3beUxNVHNyQ1lOdWs/tech.json'
+				//jsonfile = 'new/data/tech.json';
 				break;
 			case "workshop":
 				$("#events")[0].style.background="rgba(5,0,10,0.85)";
-				jsonfile = 'data/workshop.json';
+				jsonfile='https://googledrive.com/host/0BzIWIU3qCj3beUxNVHNyQ1lOdWs/workshop.json'
+				//jsonfile = 'new/data/workshop.json';
 				break;
 			case "cult":
 				$("#events")[0].style.background="rgba(15,0,0,0.85)";
+				jsonfile='https://googledrive.com/host/0BzIWIU3qCj3beUxNVHNyQ1lOdWs/cult.json'
 				// jsonfile = 'https://googledrive.com/host/0B7gpUuZnCjpdVHRwWVgzZGt2bWM/events.json';
-				jsonfile = 'data/cult.json';
+				//jsonfile = 'new/data/cult.json';
 				break;
 		}
 		$("#events .sidebar").html("<ul></ul>");
@@ -205,15 +215,17 @@ var events = {
 			success: function(data){
 				events.currentJSON=data;
 				for(var i=0;i<data.length;i++){
-					$("#events .sidebar ul").append('<li data-id="'+i+'"">'+data[i].title+'</li>');
+					$("#events .sidebar ul").append('<li data-id="'+i+'">'+data[i].title+'</li>');
 				};
 				fillDetails(0);
+				$($("#events .sidebar ul li")[0]).addClass('evt-sel');
 				$("#events .sidebar ul li").click(function(){
-					$("#events .sidebar ul li").removeClass('.evt-sel');
+					$("#events .sidebar ul li").removeClass('evt-sel');
 					var t = $(this);
-					t.addClass('.evt-sel');
 					
+					console.log(t);
 					fillDetails(t[0].dataset.id);
+					t.addClass('evt-sel');
 					// $(".evt-sel").animate({marginTop: t.style.top});
 				
 				});
@@ -223,11 +235,18 @@ var events = {
 };
 
 $('.teamtop li[data-id]').click(function(){
+	$(".teamtop .sidebar ul li").removeClass('evt-sel');
 	var a=$(this)[0].dataset.id;
-	$('.teamtop .details div[data-id]').hide();
-	$('.teamtop .details div[data-id='+a+']').show();
+	var t=$(this);
+	t.addClass('evt-sel');
+	$('.teamtop .details').animate({scrollTop: 500*a}, 'slow');
+	//$('.teamtop .details div[data-id='+a+']').show()
 });
-
+$('.teamtop .details').scroll(function(){
+$(".teamtop .sidebar ul li").removeClass('evt-sel');
+var index = Math.floor(($('.teamtop .details').scrollTop()+100)/500);
+$($(".teamtop .sidebar ul li")[index]).addClass('evt-sel');
+});
 $(window).resize(function(){
 	if(window.innerWidth<800) window.open('http://flux.src/mobile','_self');
 	updateTopicPos();
